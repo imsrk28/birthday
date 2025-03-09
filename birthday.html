@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday!</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Background Slideshow */
+        body {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            color: white;
+            overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* Slideshow Container */
+        .slideshow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .slide {
+            position: absolute;
+            width: auto;
+            height: 100%;
+            max-width: 100%;
+            max-height: 100%;
+            opacity: 0;
+            transition: opacity 2s ease-in-out;
+            object-fit: contain;
+        }
+
+        /* Overlay for Better Contrast */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: -1;
+        }
+
+        /* Header Styling */
+        h1 {
+            font-size: 2.8em;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        /* Button Styling */
+        .celebrate {
+            display: inline-block;
+            padding: 15px 30px;
+            background: white;
+            color: #ff4081;
+            font-size: 1.2em;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .celebrate:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.2em; }
+            p { font-size: 1.2em; }
+            .celebrate { font-size: 1em; padding: 12px 25px; }
+        }
+
+        /* Confetti Animation */
+        .confetti {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            background: red;
+            opacity: 0.8;
+            border-radius: 50%;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-5vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(105vh) rotate(360deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Slideshow -->
+    <div class="slideshow">
+        <img src="imagesbbf.jpg" class="slide">
+        <img src="imagesbbf2.jpg" class="slide">
+        <img src="imagesbbf3.jpg" class="slide">
+        <img src="imagesbbf4.jpg" class="slide">
+        <img src="imagesbbf5.jpg" class="slide">
+    </div>
+    <div class="overlay"></div> <!-- Overlay for Contrast -->
+
+    <h1>🎉 Happy Birthday Shatabdee! 🎂</h1>
+    <p>May your day be filled with love, laughter, and endless joy! You deserve all the happiness in the world. 💖</p>
+    <p>Thank you for being the most amazing best friend ever! 🎈</p>
+
+    <a href="home.html" class="celebrate">Back to Home</a>
+
+    <script>
+        // Slideshow Logic
+        let slides = document.querySelectorAll('.slide');
+        let currentSlide = 0;
+
+        function showNextSlide() {
+            slides[currentSlide].style.opacity = 0; // Hide current slide
+            currentSlide = (currentSlide + 1) % slides.length; // Move to next
+            slides[currentSlide].style.opacity = 1; // Show next slide
+        }
+
+        slides[currentSlide].style.opacity = 1; // Show the first image
+        setInterval(showNextSlide, 4000); // Change every 4 seconds
+
+        // Confetti Animation
+        function createConfetti() {
+            let confetti = document.createElement("div");
+            confetti.classList.add("confetti");
+
+            // Random color
+            let colors = ["red", "blue", "green", "yellow", "purple", "pink", "orange", "gold", "white"];
+            confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+
+            // Random position
+            confetti.style.left = Math.random() * 100 + "vw";
+            confetti.style.animationDuration = Math.random() * 3 + 2 + "s"; // Random speed
+            confetti.style.width = Math.random() * 10 + 5 + "px"; // Different sizes
+            confetti.style.height = confetti.style.width;
+
+            document.body.appendChild(confetti);
+
+            // Remove confetti after animation
+            setTimeout(() => { confetti.remove(); }, 5000);
+        }
+
+        // Generate confetti over time
+        setInterval(createConfetti, 200);
+    </script>
+</body>
+</html>

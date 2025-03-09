@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Cute Quote</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            color: white;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+            animation: fadeIn 2s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Background Styling */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: contain; /* Ensures the whole image fits */
+            background-repeat: no-repeat;
+            background-position: center center;
+            z-index: -1;
+            transition: background-image 0.5s ease-in-out;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        p {
+            font-size: 1.5em;
+            margin: 20px;
+            font-style: italic;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            border-radius: 12px;
+            max-width: 80%;
+        }
+
+        .next {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 15px 25px;
+            background: white;
+            color: #ff4081;
+            font-size: 1.2em;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            transition: transform 0.3s;
+        }
+
+        .next:hover {
+            transform: scale(1.1);
+        }
+
+        /* Floating Hearts */
+        .hearts {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .heart {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: pink;
+            border-radius: 50%;
+            opacity: 0.7;
+            animation: floatHearts 5s infinite;
+        }
+        p {
+            font-size: 1.6em;
+            font-weight: bold;
+            font-style: italic;
+            margin: 20px;
+            padding: 20px;
+            max-width: 80%;
+            text-align: center;
+            color: #fff;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1));
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            position: relative;
+            overflow: hidden;
+            text-shadow: 2px 2px 8px rgba(255, 255, 255, 0.7);
+            animation: shimmer 3s infinite linear;
+        }
+
+        /* Shimmer Effect */
+        @keyframes shimmer {
+            0% { background-position: -200px; }
+            100% { background-position: 200px; }
+        }
+
+
+        @keyframes floatHearts {
+            0% { transform: translateY(100vh) scale(0.5); opacity: 1; }
+            100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            h1 { font-size: 2.2em; }
+            p { font-size: 1.3em; max-width: 90%; }
+            .next { font-size: 1em; padding: 12px 25px; }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2em; }
+            p { font-size: 1.2em; max-width: 85%; }
+            .next { font-size: 1em; padding: 10px 20px; }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 1.8em; }
+            p { font-size: 1.1em; max-width: 90%; }
+            .next { font-size: 0.9em; padding: 8px 18px; }
+        }
+    </style>
+</head>
+<body>
+    <h1>💖 A Special Quote for You 💖</h1>
+    <p >"A best friend is not just someone you talk to every day; they are the person who understands your silence, laughs at your worst jokes, and stays by your side even when the whole world walks away. You are my safe place, my joy, and my forever kind of person. 💖✨"</p>
+    <a href="about_her.html" class="next">Click Here to Continue →</a>
+
+    <div class="hearts"></div>
+
+    <script>
+        // Array of images
+        const images = [
+            'imagesbbf3.jpg',
+            'imagesbbf5.jpg'
+        ];
+
+        // Select a random image
+        function setRandomBackground() {
+            const randomIndex = Math.floor(Math.random() * images.length);
+            document.body.style.backgroundImage = `url('${images[randomIndex]}')`;
+        }
+
+        // Floating Hearts Animation
+        function createHeart() {
+            const heart = document.createElement("div");
+            heart.classList.add("heart");
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = Math.random() * 3 + 3 + "s";
+            document.querySelector(".hearts").appendChild(heart);
+            setTimeout(() => heart.remove(), 5000);
+        }
+
+        setInterval(createHeart, 300);
+        setRandomBackground();
+    </script>
+</body>
+</html>
